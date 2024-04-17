@@ -7,24 +7,26 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kg.coffix.app.dto.response.MessageResponse;
+import kg.coffix.app.security.configuration.GlobalSecurityConfiguration;
 import kg.coffix.app.security.util.JsonWebTokenService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
@@ -35,11 +37,20 @@ public class JsonWebTokenFilter extends OncePerRequestFilter {
     UserDetailsService userDetailsService;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return Arrays.stream(GlobalSecurityConfiguration.whiteList)
+                .anyMatch(url -> new AntPathRequestMatcher(url).matches(request));
+    }
+
+    @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+        final String requestURI = request.getRequestURI();
+
+
         final String authorizationHeader = request.getHeader("Authorization");
         final String token;
         final String username;
@@ -69,11 +80,13 @@ public class JsonWebTokenFilter extends OncePerRequestFilter {
             response.setContentType("application/json");
             response.getWriter().write(new ObjectMapper().writeValueAsString(MessageResponse.builder()
                     .message("Forbidden: This resource is prohibited")
-                    .httpStatusCode(HttpStatusCode.valueOf(403))
+                    .statusCode(403)
                     .timestamp(Timestamp.valueOf(LocalDateTime.now()))
                     .build()));
             return;
         }
         filterChain.doFilter(request, response);
     }
+
+
 }

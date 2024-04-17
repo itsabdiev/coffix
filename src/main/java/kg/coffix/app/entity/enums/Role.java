@@ -11,9 +11,9 @@ import java.util.List;
 
 public enum Role {
 
-    ROLE_ADMIN(Arrays.asList("MODIFY", "READ", "WRITE")),
-    ROLE_USER(Collections.singletonList("READ")),
-    ROLE_MANAGER(Arrays.asList("READ", "WRITE"));
+    ADMIN(Arrays.asList("MODIFY", "READ", "WRITE")),
+    USER(Collections.singletonList("READ")),
+    MANAGER(Arrays.asList("READ", "WRITE"));
 
     final List<String> permissions;
 

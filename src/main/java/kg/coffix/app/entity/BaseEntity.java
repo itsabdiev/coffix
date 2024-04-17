@@ -14,7 +14,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.sql.Timestamp;
 
 @MappedSuperclass
@@ -39,5 +38,4 @@ public abstract class BaseEntity {
     Timestamp updatedAt;
 
     Boolean hasBeenRemoved;
-
 }
