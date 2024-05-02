@@ -1,0 +1,28 @@
+package kg.coffix.app.web;
+
+
+import kg.coffix.app.entity.enums.QuantityType;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/api/quantity-types")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
+public class QuantityTypeController {
+
+    @GetMapping
+    public List<String> getQuantityTypes() {
+        return Arrays.stream(QuantityType.values()).map(Enum::name).collect(Collectors.toList());
+    }
+}

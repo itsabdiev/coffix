@@ -48,8 +48,6 @@ public class JsonWebTokenFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
-        final String requestURI = request.getRequestURI();
-
 
         final String authorizationHeader = request.getHeader("Authorization");
         final String token;

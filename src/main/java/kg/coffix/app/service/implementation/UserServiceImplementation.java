@@ -38,12 +38,38 @@ public class UserServiceImplementation implements UserService {
                         .password("$2a$12$eMrvpU2bUFEMKe8vEpLNoOgcefEDFU/VymnC4PwchTMQe3GBEsV1q")
                         .role(Role.USER)
                         .phoneNumber("1234567890")
-                        .firstName("John")
-                        .lastName("Doe")
-                        .profileImagePath("/path/to/profile/image.jpg")
+                        .firstName("User")
+                        .lastName("Userov")
+                        .profileImagePath("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-NSEUHWmQsGxt4SfVM3f8VMW7vN8JsHnL-CnVII5E4A&s")
                         .enabled(true)
+                        .hasBeenRemoved(false)
                         .build()
+        );
 
+        userRepository.save(User.builder()
+                .email("manager")
+                .password("$2a$12$ot500PKFu7Ov5kfpLGbVLOU4dQov2eRURL8X6J3dQQbtHjXons4RO")
+                .role(Role.MANAGER)
+                .phoneNumber("1234567890")
+                .firstName("Manager")
+                .lastName("Managerov")
+                .profileImagePath("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-NSEUHWmQsGxt4SfVM3f8VMW7vN8JsHnL-CnVII5E4A&s")
+                .enabled(true)
+                .hasBeenRemoved(false)
+                .build()
+        );
+
+        userRepository.save(User.builder()
+                .email("admin")
+                .password("$2a$12$YURgoMXZO8NAfOVBp7rzp.HZaAjEj/xKI9gnuBF2Iif5wv84DXT2e")
+                .role(Role.ADMIN)
+                .phoneNumber("1234567890")
+                .firstName("Admin")
+                .lastName("Adminov")
+                .profileImagePath("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-NSEUHWmQsGxt4SfVM3f8VMW7vN8JsHnL-CnVII5E4A&s")
+                .enabled(true)
+                .hasBeenRemoved(false)
+                .build()
         );
     }
 }

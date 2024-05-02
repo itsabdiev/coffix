@@ -43,9 +43,7 @@ public class AuthenticationEndpoint {
         if (jsonWebTokenService.isTokenExpired(refreshToken)) {
             throw new JwtException("Refresh has been expired");
         }
-
         String email = jsonWebTokenService.extractUsername(refreshToken);
-
         User user = userService.loadUserByEmail(email);
         return AuthenticationResponse.builder()
                 .token(jsonWebTokenService.generateToken(user))

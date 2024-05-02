@@ -38,7 +38,7 @@ public class GlobalSecurityConfiguration {
     UserDetailsService userDetailsService;
 
     public static String[] whiteList = {
-            "/api/auth/**","/error/**"
+            "/api/auth/**","/error/**","/api/**"
     };
 
     @Bean

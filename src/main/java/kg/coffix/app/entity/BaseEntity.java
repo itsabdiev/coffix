@@ -37,5 +37,6 @@ public abstract class BaseEntity {
     @Column(insertable = false)
     Timestamp updatedAt;
 
-    Boolean hasBeenRemoved;
+    @Column(nullable = false)
+    boolean hasBeenRemoved;
 }
