@@ -47,18 +47,13 @@ public class IngredientEndpoint {
         Ingredient entity = ingredientMapper.toEntity(
                 ingredientRequest,
                 providerService.getProviderByProviderName(ingredientRequest.providerName()),
-                getQuantityType(ingredientRequest.quantityType()));
+                QuantityType.of(ingredientRequest.quantityType()));
         return ingredientService.saveIngredient(entity);
     }
 
-    private QuantityType getQuantityType(String quantityType) {
-        if (quantityType.equalsIgnoreCase("MASS")) return QuantityType.MASS;
-        else if (quantityType.equalsIgnoreCase("VOLUME")) return QuantityType.VOLUME;
-        return QuantityType.PIECE;
 
-    }
 
-    public IngredientResponse getProviderByName(String naming) {
+    public IngredientResponse getIngredientByName(String naming) {
         Ingredient ingredientByNaming = ingredientService.getIngredientByNaming(naming);
         return ingredientMapper.toDto(ingredientByNaming,providerMapper.toDto(ingredientByNaming.getProvider()));
     }
@@ -69,7 +64,7 @@ public class IngredientEndpoint {
                 ingredientMapper.toEntity(
                 ingredientRequest,
                 providerService.getProviderByProviderName(ingredientRequest.providerName()),
-                getQuantityType(ingredientRequest.quantityType())));
+                QuantityType.of(ingredientRequest.quantityType())));
     }
 
 

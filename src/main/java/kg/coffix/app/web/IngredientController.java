@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +43,7 @@ public class IngredientController {
             return ingredientEndpoint.getIngredientById(id.get());
         }
         else if (naming.isPresent()) {
-            return ingredientEndpoint.getProviderByName(naming.get());
+            return ingredientEndpoint.getIngredientByName(naming.get());
         } else {
             return ingredientEndpoint.getIngredients();
         }
@@ -67,4 +66,5 @@ public class IngredientController {
     public List<String> getProvidersName() {
         return ingredientEndpoint.getIngredientsNames();
     }
+
 }

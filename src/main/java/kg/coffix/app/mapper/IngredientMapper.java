@@ -7,13 +7,9 @@ import kg.coffix.app.entity.Ingredient;
 import kg.coffix.app.entity.Provider;
 import kg.coffix.app.entity.enums.QuantityType;
 import org.springframework.stereotype.Component;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class IngredientMapper {
-
-
 
     public Ingredient toEntity(IngredientRequest ingredientRequest, Provider provider,QuantityType quantityType) {
         return Ingredient.builder()

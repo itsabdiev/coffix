@@ -43,5 +43,15 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MessageResponse notFoundExceptionHandling(BadRequestException bre) {
+        return MessageResponse.builder()
+                .timestamp(Timestamp.valueOf(LocalDateTime.now()))
+                .statusCode(400)
+                .message(bre.getMessage())
+                .build();
+    }
+
 
 }

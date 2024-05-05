@@ -1,10 +1,7 @@
 package kg.coffix.app.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import kg.coffix.app.entity.enums.ProductType;
 import kg.coffix.app.entity.enums.SeasonalType;
 import lombok.AccessLevel;
@@ -15,10 +12,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
 import java.math.BigDecimal;
 import java.util.List;
-
 
 @Entity
 @Table(name = "products")
@@ -29,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
 
     String naming;
 
@@ -39,8 +34,8 @@ public class Product extends BaseEntity{
 
     String imageUrl;
 
-    @OneToMany
-    List<Ingredient> ingredients;
+    @ManyToMany
+    List<ProductIngredient> ingredients;
 
     String energyValue;
 
@@ -48,7 +43,9 @@ public class Product extends BaseEntity{
 
     String storageConditions;
 
+    @Enumerated(value = EnumType.STRING)
     ProductType productType;
 
+    @Enumerated(value = EnumType.STRING)
     SeasonalType seasonalType;
 }

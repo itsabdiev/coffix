@@ -1,8 +1,6 @@
 package kg.coffix.app.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import kg.coffix.app.entity.enums.QuantityType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,6 +27,7 @@ public class Ingredient extends BaseEntity {
 
     BigDecimal price;
 
+    @Enumerated(value = EnumType.STRING)
     QuantityType quantityType;
 
     Integer quantity;

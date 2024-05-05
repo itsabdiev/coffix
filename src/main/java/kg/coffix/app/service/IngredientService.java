@@ -6,6 +6,7 @@ import kg.coffix.app.entity.Ingredient;
 import java.util.List;
 
 public interface IngredientService {
+
     List<Ingredient> getIngredients();
 
     Ingredient getIngredientById(Long id);
